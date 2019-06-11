@@ -1,0 +1,77 @@
+{
+    "title": "LetMC Api V3, maintenance",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/letmc.com/maintenance/v3-maintenance/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://live-api.letmc.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "auth_apiKey": {
+                "label": "ApiKey (apiKey)",
+                "viewClass": "TextFieldView",
+                "note": "ApiKey Authentication"
+            },
+            "auth_username": {
+                "label": "Username (basic)",
+                "viewClass": "TextFieldView",
+                "note": "Basic HTTP Authentication"
+            },
+            "auth_password": {
+                "label": "Password (basic)",
+                "viewClass": "TextFieldView",
+                "note": "Basic HTTP Authentication"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "MaintenanceController_CreateMaintenanceJob": {
+            "main": "./lib/actions/MaintenanceController_CreateMaintenanceJob.js",
+            "title": "Create a maintenance job for a specific branch",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "body_content_type": {
+                    "viewClass": "SelectView",
+                    "label": "Body Content-Type",
+                    "required": true,
+                    "prompt": "Choose a body Content-Type.",
+                    "model": {
+                        "application/json": "application/json",
+                        "text/json": "text/json",
+                        "application/xml": "application/xml",
+                        "text/xml": "text/xml",
+                        "application/x-www-form-urlencoded": "application/x-www-form-urlencoded"
+                    }
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/MaintenanceController_CreateMaintenanceJob.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
